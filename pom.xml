@@ -9,14 +9,10 @@
     <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
     <modules>
-        <module>netty-rpc</module>
         <module>vertx-demo</module>
-        <module>netty-rpc-example</module>
         <module>thrift-demo</module>
         <module>gRPC-demo</module>
         <module>dubbo-demo</module>
-        <module>rpc-spring-support</module>
-        <module>rpc-spring-boot-starter</module>
     </modules>
 
     <properties>
