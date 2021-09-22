@@ -1,5 +1,6 @@
 package com.hex.srpc.test;
 
+import com.hex.rpc.sping.annotation.EnableSRpc;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

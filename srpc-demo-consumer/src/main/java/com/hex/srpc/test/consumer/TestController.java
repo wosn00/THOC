@@ -1,12 +1,12 @@
 package com.hex.srpc.test.consumer;
 
-import com.alibaba.dubbo.config.annotation.Reference;
-import com.hex.dubbo.api.RpcServerTestService;
-import com.hex.dubbo.entity.TestRequest;
-import com.hex.dubbo.entity.TestResponse;
+import com.hex.srpc.test.api.RpcServerTestService;
+import com.hex.srpc.test.entity.TestRequest;
+import com.hex.srpc.test.entity.TestResponse;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -19,6 +19,7 @@ import java.util.concurrent.CountDownLatch;
 public class TestController {
     private static final Logger logger = LoggerFactory.getLogger(TestController.class);
 
+    @Autowired
     private RpcServerTestService testService;
 
     @GetMapping("/test")

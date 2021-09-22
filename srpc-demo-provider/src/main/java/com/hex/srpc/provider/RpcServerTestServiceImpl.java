@@ -16,6 +16,7 @@ public class RpcServerTestServiceImpl {
 
     @RouteMapping("/test")
     public TestResponse handler(TestRequest request) {
+        System.out.println("收到：" + request.getBody());
 
         try {
             Thread.sleep(30);

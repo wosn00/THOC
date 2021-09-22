@@ -39,16 +39,6 @@
                 <version>${project.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.hex</groupId>
-                <artifactId>rpc-spring-support</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
-                <groupId>com.hex</groupId>
-                <artifactId>rpc-spring-boot-starter</artifactId>
-                <version>${project.version}</version>
-            </dependency>
-            <dependency>
                 <groupId>io.netty</groupId>
                 <artifactId>netty-all</artifactId>
                 <version>${netty.version}</version>
