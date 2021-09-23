@@ -19,7 +19,7 @@ import java.util.concurrent.CountDownLatch;
 public class TestController {
     private static final Logger logger = LoggerFactory.getLogger(TestController.class);
 
-    @Reference(url = "dubbo://192.168.1.2:20880")
+    @Reference(url = "dubbo://10.70.3.24:20880")
     private RpcServerTestService testService;
 
     @GetMapping("/test")

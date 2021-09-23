@@ -1,5 +1,6 @@
 package com.hex.srpc.provider;
 
+import com.hex.common.annotation.RouteBody;
 import com.hex.common.annotation.RouteMapping;
 import com.hex.common.annotation.SRpcRoute;
 import com.hex.srpc.entity.TestRequest;
@@ -15,8 +16,7 @@ import com.hex.srpc.entity.TestResponse;
 public class RpcServerTestServiceImpl {
 
     @RouteMapping("/test")
-    public TestResponse handler(TestRequest request) {
-        System.out.println("收到：" + request.getBody());
+    public TestResponse handler(@RouteBody TestRequest request) {
 
         try {
             Thread.sleep(30);
