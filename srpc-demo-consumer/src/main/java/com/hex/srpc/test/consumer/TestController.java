@@ -1,5 +1,9 @@
 package com.hex.srpc.test.consumer;
 
+import com.hex.common.net.HostAndPort;
+import com.hex.srpc.core.config.SRpcClientConfig;
+import com.hex.srpc.core.rpc.Client;
+import com.hex.srpc.core.rpc.client.SRpcClient;
 import com.hex.srpc.test.api.RpcServerTestService;
 import com.hex.srpc.test.entity.TestRequest;
 import com.hex.srpc.test.entity.TestResponse;
@@ -10,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.PostConstruct;
 import java.util.concurrent.CountDownLatch;
 
 /**
@@ -19,8 +24,18 @@ import java.util.concurrent.CountDownLatch;
 public class TestController {
     private static final Logger logger = LoggerFactory.getLogger(TestController.class);
 
-    @Autowired
-    private RpcServerTestService testService;
+//    @Autowired
+//    private RpcServerTestService testService;
+
+    private Client client;
+
+    @PostConstruct
+    public void initClient() {
+        // 初始化客户端，需填入rpc客户端配置，可使用默认配置
+        client = SRpcClient.builder()
+                .config(new SRpcClientConfig().setConnectionSizePerNode(1).setCompressEnable(false))
+                .start();
+    }
 
     @GetMapping("/test")
     public void testDubbo(int threadNum, int loopTimes) throws InterruptedException {
@@ -31,9 +46,14 @@ public class TestController {
         for (int i = 0; i < threadNum; i++) {
             new Thread(() -> {
                 TestRequest testRequest = new TestRequest().setName("zhangsan");
-                testRequest.setBody(RandomStringUtils.randomAlphanumeric(100));
+                String s = RandomStringUtils.randomAlphanumeric(100);
+                testRequest.setBody(s);
                 for (int j = 0; j < loopTimes; j++) {
-                    TestResponse handler = testService.handler(testRequest);
+//                    TestResponse handler = testService.handler(testRequest);
+                    TestResponse invoke = client.invoke("/test", testRequest, TestResponse.class, HostAndPort.from("127.0.0.1:9957"));
+                    if (!invoke.getResponse().equals(s)) {
+                        throw new RuntimeException();
+                    }
                 }
                 latch.countDown();
             }).start();
