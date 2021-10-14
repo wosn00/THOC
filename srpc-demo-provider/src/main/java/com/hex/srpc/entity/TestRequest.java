@@ -7,6 +7,7 @@ import java.io.Serializable;
  */
 public class TestRequest implements Serializable {
 
+    private static final long serialVersionUID = 8032582781316449444L;
     private String name;
     private String body;
 

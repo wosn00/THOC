@@ -1,16 +1,14 @@
-package com.hex.srpc.test.consumer;
+package com.hex.srpc.consumer;
 
 import com.hex.common.net.HostAndPort;
 import com.hex.srpc.core.config.SRpcClientConfig;
 import com.hex.srpc.core.rpc.Client;
 import com.hex.srpc.core.rpc.client.SRpcClient;
-import com.hex.srpc.test.api.RpcServerTestService;
-import com.hex.srpc.test.entity.TestRequest;
-import com.hex.srpc.test.entity.TestResponse;
+import com.hex.srpc.entity.TestRequest;
+import com.hex.srpc.entity.TestResponse;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,12 +31,12 @@ public class TestController {
     public void initClient() {
         // 初始化客户端，需填入rpc客户端配置，可使用默认配置
         client = SRpcClient.builder()
-                .config(new SRpcClientConfig().setConnectionSizePerNode(1).setCompressEnable(false))
+                .config(new SRpcClientConfig().setConnectionSizePerNode(2))
                 .start();
     }
 
     @GetMapping("/test")
-    public void testDubbo(int threadNum, int loopTimes) throws InterruptedException {
+    public void testSrpc(int threadNum, int loopTimes) throws InterruptedException {
 
         CountDownLatch latch = new CountDownLatch(threadNum);
 
@@ -50,7 +48,7 @@ public class TestController {
                 testRequest.setBody(s);
                 for (int j = 0; j < loopTimes; j++) {
 //                    TestResponse handler = testService.handler(testRequest);
-                    TestResponse invoke = client.invoke("/test", testRequest, TestResponse.class, HostAndPort.from("127.0.0.1:9957"));
+                    TestResponse invoke = client.invoke("/test", TestResponse.class, new Object[]{testRequest}, HostAndPort.from("127.0.0.1:9957"));
                     if (!invoke.getResponse().equals(s)) {
                         throw new RuntimeException();
                     }

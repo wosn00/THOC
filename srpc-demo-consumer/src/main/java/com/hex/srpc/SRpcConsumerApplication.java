@@ -1,9 +1,5 @@
-package com.hex.srpc.test;
+package com.hex.srpc;
 
-import com.hex.common.annotation.SRpcScan;
-import com.hex.srpc.core.config.SRpcClientConfig;
-import com.hex.srpc.core.rpc.Client;
-import com.hex.srpc.core.rpc.client.SRpcClient;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 

@@ -1,4 +1,4 @@
-package com.hex.srpc.test.entity;
+package com.hex.srpc.entity;
 
 import java.io.Serializable;
 
@@ -7,6 +7,7 @@ import java.io.Serializable;
  */
 public class TestResponse implements Serializable {
 
+    private static final long serialVersionUID = 5778538759955375963L;
     private String response;
 
 

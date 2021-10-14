@@ -1,6 +1,7 @@
 package com.hex.srpc;
 
 import com.hex.common.annotation.SRpcScan;
+import com.hex.common.constant.CompressType;
 import com.hex.srpc.core.config.SRpcServerConfig;
 import com.hex.srpc.core.rpc.server.SRpcServer;
 import org.springframework.boot.SpringApplication;
@@ -19,7 +20,7 @@ public class SRpcProviderApplication {
 
         // 启动服务端, 需填入rpc服务端配置, 可使用默认配置, source填写有@RouteScan注解的类
         SRpcServer.builder()
-                .serverConfig(new SRpcServerConfig().setCompressEnable(false).setBusinessThreads(500))
+                .serverConfig(new SRpcServerConfig().setBusinessThreads(500))
                 .sourceClass(SRpcProviderApplication.class)
                 .port(9957)
                 .start();
