@@ -16,6 +16,7 @@
         <module>dubbo-demo-consumer</module>
         <module>srpc-demo-provider</module>
         <module>srpc-demo-consumer</module>
+        <module>JDK-NIO</module>
     </modules>
 
     <properties>
