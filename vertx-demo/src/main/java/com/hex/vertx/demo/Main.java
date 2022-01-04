@@ -1,6 +1,7 @@
 package com.hex.vertx.demo;
 
-import com.hex.vertx.demo.verticle.RestfulVerticle;
+import com.hex.vertx.demo.event.EventBusTestVerticle;
+import com.hex.vertx.demo.verticle.HttpServerVerticle;
 import io.vertx.core.Vertx;
 
 /**
@@ -9,9 +10,20 @@ import io.vertx.core.Vertx;
 public class Main {
 
     public static void main(String[] args) {
-        Vertx vertx = Vertx.vertx();
-        vertx.deployVerticle(new RestfulVerticle());
 
+        testEventBus();
+
+        testHttpServer();
+    }
+
+    private static void testHttpServer() {
+        Vertx vertx = Vertx.vertx();
+        vertx.deployVerticle(new HttpServerVerticle());
+    }
+
+    private static void testEventBus() {
+        Vertx vertx = Vertx.vertx();
+        vertx.deployVerticle(new EventBusTestVerticle());
 
     }
 }

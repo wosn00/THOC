@@ -14,7 +14,7 @@ import io.vertx.ext.web.sstore.LocalSessionStore;
  * @author guohs
  * @date 2021/12/23
  */
-public class RestfulVerticle extends AbstractVerticle {
+public class HttpServerVerticle extends AbstractVerticle {
 
     @Override
     public void start() {
@@ -35,6 +35,7 @@ public class RestfulVerticle extends AbstractVerticle {
         router.route("/assets/*").handler(StaticHandler.create("asserts"));
 
         vertx.createHttpServer().requestHandler(router::accept).listen(8080);
+        System.out.println("http 服务器启动完成");
     }
 
     private void handlerCount(RoutingContext context) {
