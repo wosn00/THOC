@@ -27,15 +27,16 @@ public class HttpServerVerticle extends AbstractVerticle {
         //匹配任意http请求，为每次用户请求维护一个内存上的session
         router.route().handler(SessionHandler.create(LocalSessionStore.create(vertx)));
 
-        //匹配/count的get请求
+        //handler() 是直接在eventLoop线程里执行
         router.get("/count").handler(this::handlerCount);
-        //匹配/test的get请求
-        router.get("/test").handler(this::handlerGet);
+        //blockingHandler() 会将msg放入到workPool工作线程池里面异步执行,默认是有序，order为false是无序 并发执行
+        router.get("/test").blockingHandler(this::handlerGet, false);
+
         //匹配/assets/*的请求，从asserts路径获取静态资源文件
         router.route("/assets/*").handler(StaticHandler.create("asserts"));
 
         vertx.createHttpServer().requestHandler(router::accept).listen(8080);
-        System.out.println("http 服务器启动完成");
+        System.out.println("verticle 实例启动完成");
     }
 
     private void handlerCount(RoutingContext context) {

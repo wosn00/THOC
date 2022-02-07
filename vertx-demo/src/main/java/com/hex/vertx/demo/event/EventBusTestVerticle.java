@@ -29,6 +29,7 @@ public class EventBusTestVerticle extends AbstractVerticle {
     private void sendMessage() {
         EventBus eventBus = vertx.eventBus();
         eventBus.send(ADDRESS, "send a message...");
+        System.out.println("发送完成");
     }
 
     private void publishMessage() {
