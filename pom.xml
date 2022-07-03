@@ -20,6 +20,7 @@
         <module>file</module>
         <module>rocketmq-demo</module>
         <module>sentinel-demo</module>
+        <module>sentinel-spirng-boot-demo</module>
     </modules>
 
     <properties>

@@ -1,0 +1,12 @@
+server:
+  port: 8001
+#  servlet:
+#    context-path: /springboot-sentinel-client-a
+spring:
+  application:
+    name: springboot-sentinel-client-a
+  cloud:
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+      eager: true

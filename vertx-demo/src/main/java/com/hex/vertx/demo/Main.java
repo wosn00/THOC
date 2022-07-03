@@ -17,7 +17,7 @@ public class Main {
         // 初始化一个vertx实例
         vertx = Vertx.vertx(new VertxOptions().setBlockedThreadCheckInterval(99999999L));
 
-//        testEventBus();
+        testEventBus();
 
         testHttpServer();
     }
@@ -30,6 +30,6 @@ public class Main {
 
     private static void testEventBus() {
 
-        vertx.deployVerticle(new EventBusTestVerticle());
+        vertx.deployVerticle(new EventBusTestVerticle(),new DeploymentOptions().setWorkerPoolName("test-work-pool").setWorker(true));
     }
 }
